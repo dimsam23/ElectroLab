@@ -69,14 +69,14 @@ def save_project():
     
     if project:
         project.name = data.get('name', project.name)
-        project.circuit_data = data.get('circuit', project.circuit_data)
-        project.history_data = data.get('history', project.history_data)
+        project.circuit = data.get('circuit', project.circuit)
+        project.history = data.get('history', project.history)
     else:
         project = Project(
             id=project_id or f"proj_{int(datetime.utcnow().timestamp() * 1000)}",
             name=data.get('name'),
-            circuit_data=data.get('circuit'),
-            history_data=data.get('history')
+            circuit=data.get('circuit'),
+            history=data.get('history')
         )
         db.session.add(project)
     

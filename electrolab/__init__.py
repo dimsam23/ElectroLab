@@ -30,6 +30,19 @@ def create_app():
     from .routes.api_calculators import api_calculators_bp
     from .routes.pages import pages_bp
     from .routes.projects_api import projects_bp
+    # Serve legacy static paths for compatibility
+    @app.route('/js/<path:filename>')
+    def serve_js_legacy(filename):
+        from flask import send_from_directory
+        return send_from_directory(os.path.join(app.static_folder, 'js'), filename)
+    @app.route('/css/<path:filename>')
+    def serve_css_legacy(filename):
+        from flask import send_from_directory
+        return send_from_directory(os.path.join(app.static_folder, 'css'), filename)
+    @app.route('/images/<path:filename>')
+    def serve_images_legacy(filename):
+        from flask import send_from_directory
+        return send_from_directory(os.path.join(app.static_folder, 'images'), filename)
 
     app.register_blueprint(pages_bp)
     app.register_blueprint(api_calculators_bp)

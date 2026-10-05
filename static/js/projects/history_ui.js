@@ -106,12 +106,19 @@ export async function setupHistoryUI(offset = 0) {
              <tr style="background:var(--surface-2);border-bottom:1px solid var(--border);color:var(--text);">
              <th style="padding:12px;">Operation</th><th style="padding:12px;">Result</th><th style="padding:12px;">Time</th><th style="padding:12px;">Action</th></tr></thead><tbody>`;
     calcHistory.forEach((entry) => {
-      const resultStr = typeof entry.result === 'object' ? 
-        (entry.result.range ? `Range = ${entry.result.range}, Tolerance = ${entry.result.tolerance}` : JSON.stringify(entry.result)) : entry.result;
+      let resultDisplay = "";
+      if (typeof entry.result === 'object') {
+        resultDisplay = Object.entries(entry.result)
+          .map(([k, v]) => `${k.charAt(0).toUpperCase() + k.slice(1)}: ${v}`)
+          .join(', ');
+      } else {
+        resultDisplay = entry.result;
+      }
+      
       html += `
         <tr style="border-bottom:1px solid var(--border);">
           <td style="padding:12px;color:var(--accent);">${entry.operation}</td>
-          <td style="padding:12px;color:var(--text);">${resultStr}</td>
+          <td style="padding:12px;color:var(--text);">${resultDisplay}</td>
           <td style="padding:12px;color:var(--muted);">${new Date(entry.created_at).toLocaleString()}</td>
           <td style="padding:12px;"><button class="btn-delete-calc" data-id="${entry.id}" style="background:var(--surface-2);color:var(--text);border:1px solid var(--border);padding:6px 10px;border-radius:4px;cursor:pointer;">Delete</button></td>
         </tr>`;

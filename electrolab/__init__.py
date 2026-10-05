@@ -26,9 +26,13 @@ def create_app():
     if '+pg8000' in db_url:
         db_url = db_url.replace('+pg8000', '')
 
-    # Hapus semua query params (seperti ?sslmode=...) karena bisa menyebabkan error driver
+    # Hapus semua query params (seperti ?sslmode=...)
     if '?' in db_url:
         db_url = db_url.split('?')[0]
+
+    # Paksa driver psycopg2 (psycopg2-binary sudah di‑requirements)
+    if db_url.startswith('postgresql://') and '+psycopg2' not in db_url:
+        db_url = db_url.replace('postgresql://', 'postgresql+psycopg2://', 1)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

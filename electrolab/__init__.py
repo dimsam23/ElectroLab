@@ -21,14 +21,6 @@ def create_app():
     # Transform postgres:// ke postgresql://
     if db_url.startswith("postgres://"):
         db_url = db_url.replace("postgres://", "postgresql://", 1)
-    
-    # Add pg8000 driver jika belum ada
-    if 'postgresql' in db_url and '+pg8000' not in db_url:
-        db_url = db_url.replace('postgresql://', 'postgresql+pg8000://', 1)
-    
-    # Hapus query params (sslmode, etc) karena pg8000 tidak support kwarg tersebut
-    if '?' in db_url:
-        db_url = db_url.split('?')[0]
 
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

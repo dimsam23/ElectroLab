@@ -6,9 +6,10 @@
     }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "app.py"
-    }
+    { "src": "/css/(.*)", "dest": "/public/css/$1" },
+    { "src": "/js/(.*)", "dest": "/public/js/$1" },
+    { "src": "/images/(.*)", "dest": "/public/images/$1" },
+    { "src": "/favicon.ico", "dest": "/public/favicon.ico" },
+    { "src": "/(.*)", "dest": "app.py" }
   ]
 }

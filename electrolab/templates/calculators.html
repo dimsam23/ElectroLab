@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+
+{% block title %}Calculators — ElectroLab{% endblock %}
+
+{% block content %}
+<section class="container section">
+  <h1 class="page-title">Calculators</h1>
+
+  <p class="error-box" id="load-error" hidden>
+    Could not load the unit options from the server. Please reload the page.
+  </p>
+
+  <!-- Tab: setiap tab adalah link ke #id, jadi kartu di Dashboard bisa langsung membuka tab yang tepat -->
+  <nav class="tabs" aria-label="Calculators">
+    <a class="tab" href="#ohm" data-tab="ohm">Ohm's Law</a>
+    <a class="tab" href="#power" data-tab="power">Power</a>
+    <a class="tab" href="#energy" data-tab="energy">Energy</a>
+    <a class="tab" href="#series-parallel" data-tab="series-parallel">Series / Parallel</a>
+    <a class="tab" href="#converter" data-tab="converter">Unit Converter</a>
+    <a class="tab" href="#color-code" data-tab="color-code">Color Code</a>
+    <a class="tab" href="#rc" data-tab="rc">RC Time Constant</a>
+  </nav>
+
+  <!-- ===== Ohm's Law ===== -->
+  <section class="calc-panel" id="panel-ohm">
+    <div class="calc-card">
+      <h2>Ohm's Law</h2>
+      <p class="hint">Fill in exactly two fields and leave the third one empty. V = I × R.</p>
+      <form class="calc-form" data-endpoint="ohm" data-title="Ohm's Law" novalidate>
+        <div class="field">
+          <label for="ohm-voltage">Voltage</label>
+          <div class="input-group">
+            <input id="ohm-voltage" name="voltage" type="text" inputmode="decimal" placeholder="e.g. 12" autocomplete="off">
+            <select data-quantity="voltage" aria-label="Voltage unit"></select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="ohm-current">Current</label>
+          <div class="input-group">
+            <input id="ohm-current" name="current" type="text" inputmode="decimal" placeholder="e.g. 20" autocomplete="off">
+            <select data-quantity="current" aria-label="Current unit"></select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="ohm-resistance">Resistance</label>
+          <div class="input-group">
+            <input id="ohm-resistance" name="resistance" type="text" inputmode="decimal" placeholder="e.g. 1" autocomplete="off">
+            <select data-quantity="resistance" aria-label="Resistance unit"></select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" type="submit">Calculate</button>
+          <button class="btn btn-outline" type="reset">Clear</button>
+        </div>
+      </form>
+      <div class="result" data-result aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ===== Power ===== -->
+  <section class="calc-panel" id="panel-power">
+    <div class="calc-card">
+      <h2>Power Calculator</h2>
+      <p class="hint">Fill in exactly two of the four fields. P = V × I, P = I² × R, P = V² / R. For example, resistance + voltage gives the current and power.</p>
+      <form class="calc-form" data-endpoint="power" data-title="Power Calculator" novalidate>
+        <div class="field">
+          <label for="power-power">Power</label>
+          <div class="input-group">
+            <input id="power-power" name="power" type="text" inputmode="decimal" placeholder="e.g. 6" autocomplete="off">
+            <select data-quantity="power" aria-label="Power unit"></select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="power-voltage">Voltage</label>
+          <div class="input-group">
+            <input id="power-voltage" name="voltage" type="text" inputmode="decimal" placeholder="e.g. 12" autocomplete="off">
+            <select data-quantity="voltage" aria-label="Voltage unit"></select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="power-current">Current</label>
+          <div class="input-group">
+            <input id="power-current" name="current" type="text" inputmode="decimal" placeholder="e.g. 500" autocomplete="off">
+            <select data-quantity="current" aria-label="Current unit"></select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="power-resistance">Resistance</label>
+          <div class="input-group">
+            <input id="power-resistance" name="resistance" type="text" inputmode="decimal" placeholder="e.g. 24" autocomplete="off">
+            <select data-quantity="resistance" aria-label="Resistance unit"></select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" type="submit">Calculate</button>
+          <button class="btn btn-outline" type="reset">Clear</button>
+        </div>
+      </form>
+      <div class="result" data-result aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ===== Energy ===== -->
+  <section class="calc-panel" id="panel-energy">
+    <div class="calc-card">
+      <h2>Energy Calculator</h2>
+      <p class="hint">Fill in exactly two fields and leave the third one empty. E = P × t. Results are shown in joules and in watt-hours.</p>
+      <form class="calc-form" data-endpoint="energy" data-title="Energy Calculator" novalidate>
+        <div class="field">
+          <label for="energy-power">Power</label>
+          <div class="input-group">
+            <input id="energy-power" name="power" type="text" inputmode="decimal" placeholder="e.g. 6" autocomplete="off">
+            <select data-quantity="power" aria-label="Power unit"></select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="energy-time">Time</label>
+          <div class="input-group">
+            <input id="energy-time" name="time" type="text" inputmode="decimal" placeholder="e.g. 2" autocomplete="off">
+            <select data-quantity="time" data-default-unit="h" aria-label="Time unit"></select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="energy-energy">Energy</label>
+          <div class="input-group">
+            <input id="energy-energy" name="energy" type="text" inputmode="decimal" placeholder="e.g. 12" autocomplete="off">
+            <select data-quantity="energy" data-default-unit="Wh" aria-label="Energy unit"></select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" type="submit">Calculate</button>
+          <button class="btn btn-outline" type="reset">Clear</button>
+        </div>
+      </form>
+      <div class="result" data-result aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ===== Series / Parallel ===== -->
+  <section class="calc-panel" id="panel-series-parallel">
+    <div class="calc-card">
+      <h2>Resistors in Series / Parallel</h2>
+      <p class="hint">Enter two or more resistors. You get the equivalent resistance for both connections.</p>
+      <form class="calc-form" id="sp-form" novalidate>
+        <div id="sp-rows"></div>
+        <button class="btn btn-outline" type="button" id="sp-add">+ Add resistor</button>
+        <div class="btn-row">
+          <button class="btn btn-primary" type="submit">Calculate</button>
+          <button class="btn btn-outline" type="reset">Clear</button>
+        </div>
+      </form>
+      <div class="result" data-result aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ===== Unit Converter ===== -->
+  <section class="calc-panel" id="panel-converter">
+    <div class="calc-card">
+      <h2>Unit Converter</h2>
+      <p class="hint">Convert between prefixes of the same quantity, for example mA to A or kΩ to Ω.</p>
+      <form class="calc-form" id="convert-form" novalidate>
+        <div class="field">
+          <label for="conv-quantity">Quantity</label>
+          <select id="conv-quantity"></select>
+        </div>
+        <div class="field">
+          <label for="conv-value">Value</label>
+          <input id="conv-value" type="text" inputmode="decimal" placeholder="e.g. 1500" autocomplete="off">
+        </div>
+        <div class="convert-grid">
+          <div class="field">
+            <label for="conv-from">From</label>
+            <select id="conv-from"></select>
+          </div>
+          <button class="btn-icon" type="button" id="conv-swap" aria-label="Swap units">⇄</button>
+          <div class="field">
+            <label for="conv-to">To</label>
+            <select id="conv-to"></select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" type="submit">Convert</button>
+          <button class="btn btn-outline" type="reset">Clear</button>
+        </div>
+      </form>
+      <div class="result" data-result aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ===== Resistor Color Code ===== -->
+  <section class="calc-panel" id="panel-color-code">
+    <div class="calc-card">
+      <h2>Resistor Color Code</h2>
+      <p class="hint">Pick the colors of a 4-band or 5-band resistor. The result updates automatically.</p>
+
+      <div class="field" style="margin-bottom: 1rem; max-width: 200px;">
+        <label for="cc-bands-count">Resistor Bands</label>
+        <select id="cc-bands-count">
+          <option value="4" selected>4-Band</option>
+          <option value="5">5-Band</option>
+        </select>
+      </div>
+
+      <svg class="resistor-svg" viewBox="0 0 320 80" role="img" aria-label="Resistor with color bands">
+        <line x1="0" y1="40" x2="60" y2="40" stroke="#9ca3af" stroke-width="4"/>
+        <line x1="260" y1="40" x2="320" y2="40" stroke="#9ca3af" stroke-width="4"/>
+        <rect x="55" y="15" width="210" height="50" rx="22" fill="#d6b88a"/>
+        <rect id="band-1" x="75" y="15" width="12" height="50" fill="#8b4513"/>
+        <rect id="band-2" x="95" y="15" width="12" height="50" fill="#111111"/>
+        <rect id="band-3" x="115" y="15" width="12" height="50" fill="#dc2626" style="display: none;"/>
+        <rect id="band-4" x="135" y="15" width="12" height="50" fill="#dc2626"/>
+        <rect id="band-5" x="220" y="15" width="12" height="50" fill="#d4af37"/>
+      </svg>
+
+      <form class="calc-form" id="cc-form" novalidate>
+        <div class="cc-grid">
+          <div class="field">
+            <label for="cc-band1">Band 1</label>
+            <select id="cc-band1"></select>
+          </div>
+          <div class="field">
+            <label for="cc-band2">Band 2</label>
+            <select id="cc-band2"></select>
+          </div>
+          <div class="field" id="field-band3" style="display: none;">
+            <label for="cc-band3">Band 3</label>
+            <select id="cc-band3"></select>
+          </div>
+          <div class="field">
+            <label for="cc-multiplier">Multiplier</label>
+            <select id="cc-multiplier"></select>
+          </div>
+          <div class="field">
+            <label for="cc-tolerance">Tolerance</label>
+            <select id="cc-tolerance"></select>
+          </div>
+        </div>
+      </form>
+      <div class="result" data-result aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ===== RC Time Constant ===== -->
+  <section class="calc-panel" id="panel-rc">
+    <div class="calc-card">
+      <h2>RC Time Constant</h2>
+      <p class="hint">Time constant of a resistor and capacitor. τ = R × C.</p>
+      <form class="calc-form" data-endpoint="rc" data-title="RC Time Constant" novalidate>
+        <div class="field">
+          <label for="rc-resistance">Resistance</label>
+          <div class="input-group">
+            <input id="rc-resistance" name="resistance" type="text" inputmode="decimal" placeholder="e.g. 10" autocomplete="off">
+            <select data-quantity="resistance" aria-label="Resistance unit"></select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="rc-capacitance">Capacitance</label>
+          <div class="input-group">
+            <input id="rc-capacitance" name="capacitance" type="text" inputmode="decimal" placeholder="e.g. 100" autocomplete="off">
+            <select data-quantity="capacitance" aria-label="Capacitance unit"></select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" type="submit">Calculate</button>
+          <button class="btn btn-outline" type="reset">Clear</button>
+        </div>
+      </form>
+      <div class="result" data-result aria-live="polite"></div>
+    </div>
+  </section>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="/js/calculator.js"></script>
+{% endblock %}

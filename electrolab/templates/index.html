@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard — ElectroLab{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container">
+    <p class="eyebrow">Electronics Lab in Your Browser</p>
+    <h1>Build circuits. Calculate faster.</h1>
+    <p class="lead">
+      ElectroLab helps you understand basic electronic circuits: draw a circuit,
+      run a simple DC simulation, and solve everyday calculations like Ohm's Law,
+      resistor values, and power.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ url_for('pages.simulator') }}">Circuit Simulator</a>
+      <a class="btn btn-outline" href="{{ url_for('pages.calculators') }}">Calculators</a>
+      <a class="btn btn-outline" href="{{ url_for('pages.projects') }}">Projects</a>
+      <a class="btn btn-outline" href="{{ url_for('pages.history') }}">History</a>
+    </div>
+  </div>
+</section>
+
+<section class="container section">
+  <h2 class="section-title">Main Tools</h2>
+
+  <div class="card-grid">
+    <a class="card" href="{{ url_for('pages.calculators') }}#ohm">
+      <span class="card-icon">Ω</span>
+      <h3>Ohm's Law</h3>
+      <p>Enter two values, get the third: voltage, current, or resistance.</p>
+    </a>
+
+    <a class="card" href="{{ url_for('pages.calculators') }}#power">
+      <span class="card-icon">W</span>
+      <h3>Power Calculator</h3>
+      <p>Solve for power, voltage, current, or resistance from any two values.</p>
+    </a>
+
+    <a class="card" href="{{ url_for('pages.calculators') }}#energy">
+      <span class="card-icon">E</span>
+      <h3>Energy Calculator</h3>
+      <p>Calculate energy from power and time, in joules or watt-hours.</p>
+    </a>
+
+    <a class="card" href="{{ url_for('pages.calculators') }}#series-parallel">
+      <span class="card-icon">∥</span>
+      <h3>Series / Parallel</h3>
+      <p>Get the equivalent resistance of several resistors.</p>
+    </a>
+
+    <a class="card card-featured" href="{{ url_for('pages.simulator') }}">
+      <span class="card-icon">⚡</span>
+      <h3>Circuit Simulator</h3>
+      <p>Drag components, wire them together, and run a DC simulation.</p>
+    </a>
+  </div>
+</section>
+{% endblock %}

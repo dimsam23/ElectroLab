@@ -1,0 +1,693 @@
+/* ElectroLab: Engineering Dashboard theme */
+
+:root {
+  --bg: #0b1220;
+  --surface: #121a2b;
+  --surface-2: #1a2438;
+  --border: #26324a;
+  --text: #e6edf7;
+  --muted: #94a3b8;
+  --accent: #22d3ee;
+  --accent-strong: #06b6d4;
+  --radius: 12px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+main { flex: 1; }
+
+a { color: inherit; text-decoration: none; }
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ---------- Header / Navbar ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(11, 18, 32, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-height: 60px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+
+.brand-icon { color: var(--accent); }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1.25rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.nav-links a {
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover { color: var(--text); background: var(--surface-2); }
+
+.nav-links a.active {
+  color: var(--accent);
+  background: var(--surface-2);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 4.5rem 0 3.5rem;
+  border-bottom: 1px solid var(--border);
+  /* pola grid tipis ala kertas teknik */
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.15;
+}
+
+.lead {
+  max-width: 640px;
+  margin: 0 0 2rem;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.3rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-primary { background: var(--accent); color: #04222a; }
+.btn-primary:hover { background: var(--accent-strong); }
+
+.btn-outline { background: transparent; border-color: var(--border); color: var(--text); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- Sections & Cards ---------- */
+.section { padding: 3rem 1.25rem; }
+
+.section-title { margin: 0 0 1.5rem; font-size: 1.4rem; }
+
+.page-title { margin: 0 0 1.5rem; font-size: 1.8rem; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  display: block;
+  padding: 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+.card-featured { border-color: var(--accent-strong); background: var(--surface-2); }
+
+.card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 0.9rem;
+  border-radius: 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.card h3 { margin: 0 0 0.4rem; font-size: 1.05rem; }
+.card p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+
+/* ---------- Placeholder (halaman yang belum dibuat) ---------- */
+.placeholder {
+  padding: 2rem;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--muted);
+}
+
+.placeholder p { margin: 0; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* ---------- Responsive (mobile) ---------- */
+@media (max-width: 720px) {
+  .nav-toggle { display: block; }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    padding: 0.5rem 0 1rem;
+  }
+
+  .nav-links.open { display: flex; }
+
+  .hero { padding: 3rem 0 2.5rem; }
+}
+
+/* ================= Calculators (Phase 4B) ================= */
+
+/* ---------- Tab ---------- */
+.tabs {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto; /* di HP, tab bisa digeser ke samping */
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.tab {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 0.5rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.tab:hover { color: var(--text); border-color: var(--accent); }
+
+.tab.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #04222a;
+  font-weight: 600;
+}
+
+.calc-panel { display: none; }
+.calc-panel.active { display: block; }
+
+/* ---------- Kartu & form ---------- */
+.calc-card {
+  max-width: 640px;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.calc-card h2 { margin: 0 0 0.25rem; font-size: 1.3rem; }
+
+.hint { margin: 0 0 1.25rem; color: var(--muted); font-size: 0.92rem; }
+
+.field { margin-bottom: 1rem; }
+
+.field label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+  color-scheme: dark;
+}
+
+input[type="text"]:focus,
+select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+
+::placeholder { color: #64748b; }
+
+.input-group { display: flex; gap: 0.5rem; }
+.input-group input { flex: 1; min-width: 0; }
+.input-group select { flex: 0 0 auto; width: auto; min-width: 5.5rem; }
+
+button.btn { font-family: inherit; cursor: pointer; }
+
+.btn:disabled,
+.btn-icon:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.25rem; }
+
+.btn-icon {
+  width: 2.3rem;
+  height: 2.3rem;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-icon:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+
+/* ---------- Series / Parallel ---------- */
+.sp-row {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr 2.3rem;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.sp-label { font-family: var(--mono); color: var(--muted); }
+
+/* ---------- Unit Converter ---------- */
+.convert-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: 0.5rem;
+}
+
+.convert-grid .btn-icon { margin-bottom: 1rem; }
+
+/* ---------- Color Code ---------- */
+.resistor-svg {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 1.25rem;
+}
+
+.cc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0 0.8rem;
+}
+
+/* ---------- Hasil ---------- */
+.result { margin-top: 1.25rem; }
+
+.result-box {
+  padding: 1rem 1.1rem;
+  margin-top: 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.result-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.result-item {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.result-item.solved {
+  border-color: var(--accent);
+  background: rgba(34, 211, 238, 0.08);
+}
+
+.result-label { display: block; font-size: 0.75rem; color: var(--muted); }
+
+.result-value {
+  display: block;
+  font-family: var(--mono);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.detail { margin: 0.35rem 0 0; font-size: 0.85rem; color: var(--muted); }
+.detail-label { display: inline-block; min-width: 4.5rem; }
+.detail code { font-family: var(--mono); color: var(--text); }
+
+.error-box {
+  padding: 0.9rem 1rem;
+  border: 1px solid #f87171;
+  border-radius: 10px;
+  background: rgba(248, 113, 113, 0.08);
+  color: #fecaca;
+}
+
+.error-box p { margin: 0.3rem 0 0; }
+
+/* ================= Circuit Simulator (Phase 5A) ================= */
+
+.container-wide { max-width: 1400px; }
+
+/* Tata letak: sidebar | kanvas, lalu panel di bawahnya */
+.sim-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  grid-template-areas:
+    "palette main"
+    "palette panels";
+  gap: 1rem;
+  align-items: start;
+}
+
+.sim-palette { grid-area: palette; }
+.sim-main { grid-area: main; min-width: 0; }
+.sim-panels {
+  grid-area: panels;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.palette-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.sim-card {
+  padding: 1rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.sim-card .hint { margin: 0; }
+.sim-heading { margin: 0 0 0.75rem; font-size: 1rem; }
+.sim-card .sim-tip { margin-top: 0.75rem; font-size: 0.82rem; }
+
+/* ---------- Sidebar komponen ---------- */
+.palette-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  margin-bottom: 0.5rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.92rem;
+  text-align: left;
+  cursor: grab;
+  user-select: none;
+  touch-action: none; /* supaya drag dengan jari tidak menggulir halaman */
+}
+
+.palette-item:hover:not(:disabled) { border-color: var(--accent); }
+.palette-item:disabled { opacity: 0.45; cursor: not-allowed; }
+.palette-icon { width: 54px; height: 44px; flex: 0 0 auto; }
+
+.palette-ghost {
+  position: fixed;
+  z-index: 100;
+  margin: 0;
+  pointer-events: none;
+  opacity: 0.85;
+  border-color: var(--accent);
+}
+
+/* ---------- Toolbar & kanvas ---------- */
+.sim-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.sim-count { margin-left: auto; color: var(--muted); font-size: 0.9rem; }
+
+/* Zoom controls - compact dan rapi */
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 0.5rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid var(--border);
+}
+
+.zoom-level {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  min-width: 50px;
+  text-align: center;
+}
+
+.sim-canvas-wrap {
+  position: relative; /* tempat petunjuk kabel (.wire-hint) */
+  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.sim-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: none;
+  user-select: none;
+}
+
+.grid-line { fill: none; stroke: rgba(148, 163, 184, 0.14); stroke-width: 1; }
+
+/* Simbol komponen */
+.sym {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sym-text {
+  fill: var(--text);
+  stroke: none;
+  font: 600 13px var(--mono);
+  text-anchor: middle;
+}
+
+.comp-label {
+  fill: var(--muted);
+  font: 12px var(--mono);
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.hit-area { fill: transparent; }
+
+.terminal { fill: var(--bg); stroke: var(--accent); stroke-width: 2; cursor: crosshair; }
+.terminal:hover { fill: var(--accent); }
+.terminal.connected { fill: var(--accent); }
+.terminal.snap { fill: #facc15; stroke: #facc15; }
+.terminal-hit { fill: transparent; cursor: crosshair; }
+
+.component { cursor: move; }
+.component.selected .hit-area {
+  fill: rgba(34, 211, 238, 0.07);
+  stroke: var(--accent);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+
+/* Kabel */
+.wire {
+  fill: none;
+  stroke: #4ade80;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+.wire.preview { stroke: var(--accent); stroke-dasharray: 6 4; }
+.wire-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 14;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  cursor: pointer;
+}
+.wire-group:hover .wire { stroke: #86efac; }
+.wire-group.selected .wire { stroke: #facc15; stroke-width: 3.5; }
+
+/* Panel Properties */
+.prop-title { margin: 0 0 0.75rem; font-weight: 600; }
+.prop-actions { margin-top: 0.25rem; }
+input[aria-invalid="true"] { border-color: #f87171; }
+.btn-danger:hover { border-color: #f87171; color: #f87171; }
+
+.canvas-hint {
+  fill: var(--muted);
+  font: 16px var(--font);
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+/* Style for selected items */
+.selected-group {
+  outline: 2px dashed var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ---------- Layar kecil ---------- */
+@media (max-width: 900px) {
+  .sim-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "palette"
+      "main"
+      "panels";
+  }
+
+  .palette-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0 0.5rem;
+  }
+
+  .sim-panels { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- Junction (checkpoint) ---------- */
+.junction { cursor: move; }
+.junction-dot { fill: #4ade80; stroke: var(--bg); stroke-width: 1.5; }
+.junction.selected .junction-dot,
+.junction-dot.snap { fill: #facc15; }
+
+/* ---------- Hasil simulasi ---------- */
+.comp-reading {
+  fill: var(--accent);
+  font: 600 13px var(--mono);
+  text-anchor: middle;
+  pointer-events: none;
+}
+.component.conducting .sym { stroke: var(--accent); }
+.component.lit .sym { stroke: #facc15; }
+.component.overcurrent .sym { stroke: #f87171; }
+
+.result-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.result-table th,
+.result-table td { padding: 0.35rem 0.5rem; text-align: left; border-bottom: 1px solid var(--border); }
+.result-table th { color: var(--muted); font-weight: 600; }
+.result-table td:not(:first-child) { font-family: var(--mono); }
+.sim-warning { margin-bottom: 0.6rem; }
+.sim-note { margin-top: 0.6rem; font-size: 0.8rem; }
+kbd { padding: 0 0.3rem; border: 1px solid var(--border); border-radius: 4px; font-family: var(--mono); font-size: 0.8em; }
+
+/* ---------- Petunjuk saat menarik kabel ---------- */
+.wire-hint {
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  margin: 0;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.8rem;
+  background: rgba(8, 12, 22, 0.88);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  pointer-events: none; /* tidak menghalangi klik di kanvas */
+}
+.wire-hint[hidden] { display: none; }

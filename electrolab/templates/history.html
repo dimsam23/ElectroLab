@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}History — ElectroLab{% endblock %}
+
+{% block content %}
+<section class="container section">
+  <h1 class="page-title">History</h1>
+  <div id="history-list-app"></div>
+</section>
+<script type="module">
+  import { setupHistoryUI } from "{{ url_for('static', filename='js/projects/history_ui.js') }}";
+  setupHistoryUI();
+</script>
+{% endblock %}

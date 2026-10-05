@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Simulator — ElectroLab{% endblock %}
+
+{% block content %}
+<section class="container container-wide section">
+  <h1 class="page-title">Circuit Simulator</h1>
+
+  <div class="sim-layout">
+    <!-- Sidebar komponen (diisi oleh palette.js) -->
+    <aside class="sim-card sim-palette">
+      <h2 class="sim-heading">Components</h2>
+      <div class="palette-list" id="palette"></div>
+      <p class="hint sim-tip">Drag a component onto the canvas, or click it to add.</p>
+    </aside>
+
+    <!-- Toolbar + kanvas -->
+    <div class="sim-main">
+      <div class="sim-toolbar">
+        <button class="btn btn-primary" type="button" id="sim-run">▶ Run Simulation</button>
+        <button class="btn btn-outline" type="button" id="sim-clear">Clear Canvas</button>
+        <span class="sim-count" id="sim-count"></span>
+        <div class="zoom-controls">
+          <button class="btn-icon" type="button" id="zoom-out" title="Zoom Out (–)">−</button>
+          <span class="zoom-level" id="zoom-level">100%</span>
+          <button class="btn-icon" type="button" id="zoom-in" title="Zoom In (+)">+</button>
+          <button class="btn-icon" type="button" id="zoom-reset" title="Reset (1:1)">⟲</button>
+        </div>
+      </div>
+
+      <div class="sim-canvas-wrap">
+        <svg id="sim-canvas" class="sim-canvas" viewBox="0 0 1000 600"
+             role="img" aria-label="Circuit canvas">
+          <defs>
+            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M20 0H0V20" class="grid-line"/>
+            </pattern>
+          </defs>
+          <rect width="1000" height="600" fill="url(#grid)"/>
+          <g id="wires-layer"></g>
+          <g id="components-layer"></g>
+          <g id="preview-layer"></g>
+          <text id="empty-hint" class="canvas-hint" x="500" y="300">
+            Drag a component here to start
+          </text>
+        </svg>
+        <p class="wire-hint" id="wire-hint" hidden>
+          Wiring: click empty space to make a corner · <kbd>Space</kbd> or right-click to flip corner ·
+          click a terminal to finish · click the last point or press <kbd>Esc</kbd> to stop
+        </p>
+      </div>
+    </div>
+
+    <!-- Panel bawah: Properties dan Simulation Result -->
+    <div class="sim-panels">
+      <section class="sim-card">
+        <h2 class="sim-heading">Properties</h2>
+        <div id="properties-panel"></div>
+      </section>
+      <section class="sim-card">
+        <h2 class="sim-heading">Simulation Result</h2>
+        <div id="results-panel"></div>
+      </section>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="/js/simulator/main.js"></script>
+{% endblock %}

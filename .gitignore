@@ -1,0 +1,19 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Secrets: jangan pernah di-commit
+.env
+.env.local
+
+# Vercel
+.vercel/
+
+# Editor / OS
+.vscode/
+.DS_Store
+
+*.db
+instance/

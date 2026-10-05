@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Projects — ElectroLab{% endblock %}
+
+{% block content %}
+<section class="container section">
+  <h1 class="page-title">Projects</h1>
+  <div style="max-width: 800px; margin: 0 auto 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+    <label for="import-file-input" style="display: inline-block; background: #10b981; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 600; cursor: pointer;">
+      📥 Import Project
+    </label>
+    <input type="file" id="import-file-input" accept=".json" style="display: none;">
+    <button id="btn-clear-all" style="background: #f87171; color: white; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 600; cursor: pointer;">🗑️ Clear All</button>
+    <input type="text" id="search-proj" placeholder="Search projects..." style="flex: 1; min-width: 200px; padding: 10px; border-radius: 6px; border: 1px solid #26324a; background: #0b1220; color: white;">
+  </div>
+  <div id="projects-list-app"></div>
+</section>
+<script type="module">
+  import { setupProjectsUI } from "{{ url_for('static', filename='js/projects/projects_ui.js') }}";
+  import { importProject, clearAllProjects } from "{{ url_for('static', filename='js/projects/storage.js') }}";
+  import { showToast } from "{{ url_for('static', filename='js/utils/toast.js') }}";
+
+  setupProjectsUI({
+    onOpenProject: (id) => {
+      window.location.href = "{{ url_for('pages.simulator') }}?proj=" + id;
+    }
+  });
+
+  document.getElementById('import-file-input').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const project = importProject(event.target.result);
+        showToast(`Project "${project.name}" imported successfully`, "success");
+        location.reload();
+      } catch (err) {
+        showToast("Failed to import project: " + err.message, "error");
+        console.error(err);
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  });
+
+  document.getElementById('btn-clear-all').addEventListener('click', () => {
+    if (confirm("Clear all projects? This action cannot be undone.")) {
+      clearAllProjects();
+      showToast("All projects cleared", "warning");
+      location.reload();
+    }
+  });
+</script>
+{% endblock %}

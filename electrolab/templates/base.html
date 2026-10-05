@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ElectroLab{% endblock %}</title>
+  <link rel="stylesheet" href="/css/style.css">
+  {% block head %}{% endblock %}
+</head>
+<body>
+    <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="{{ url_for('pages.index') }}">
+        <span class="brand-icon">⚡</span>ElectroLab
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button"
+              aria-label="Toggle menu" aria-expanded="false">☰</button>
+
+      <nav class="nav-links" id="navLinks">
+        {% set links = [
+          ('pages.index', 'Dashboard'),
+          ('pages.simulator', 'Simulator'),
+          ('pages.calculators', 'Calculators'),
+          ('pages.projects', 'Projects'),
+          ('pages.history', 'History')
+        ] %}
+        {% for endpoint, label in links %}
+          <a href="{{ url_for(endpoint) }}"
+             class="{{ 'active' if request.endpoint == endpoint }}">{{ label }}</a>
+        {% endfor %}
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      ElectroLab · Electronic Circuit Simulator &amp; Calculator
+    </div>
+  </footer>
+
+  <script src="/js/ui.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

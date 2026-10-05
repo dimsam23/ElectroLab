@@ -43,17 +43,17 @@ def create_app():
     @app.route('/css/<path:filename>')
     def serve_css(filename):
         from flask import send_from_directory
-        return send_from_directory(os.path.join(app.static_folder, 'css'), filename)
+        return send_from_directory(os.path.join(static_folder, 'css'), filename)
     
     @app.route('/js/<path:filename>')
     def serve_js(filename):
         from flask import send_from_directory
-        return send_from_directory(os.path.join(app.static_folder, 'js'), filename)
+        return send_from_directory(os.path.join(static_folder, 'js'), filename)
     
     @app.route('/images/<path:filename>')
     def serve_images(filename):
         from flask import send_from_directory
-        return send_from_directory(os.path.join(app.static_folder, 'images'), filename)
+        return send_from_directory(os.path.join(static_folder, 'images'), filename)
 
     # Daftarkan blueprint
     from .routes.api_calculators import api_calculators_bp

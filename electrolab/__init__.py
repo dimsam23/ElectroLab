@@ -39,6 +39,11 @@ def create_app():
     os.makedirs(app.instance_path, exist_ok=True)
     db.init_app(app)
 
+    # Root route to test
+    @app.route('/test-static')
+    def test_static():
+        return "Static path: " + app.static_folder
+
     # Daftarkan blueprint
     from .routes.api_calculators import api_calculators_bp
     from .routes.pages import pages_bp

@@ -21,6 +21,10 @@ def create_app():
     # Transform postgres:// ke postgresql://
     if db_url.startswith("postgres://"):
         db_url = db_url.replace("postgres://", "postgresql://", 1)
+    
+    # Hapus +pg8000 jika ada (gunakan driver default psycopg2)
+    if '+pg8000' in db_url:
+        db_url = db_url.replace('+pg8000', '')
 
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

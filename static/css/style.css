@@ -669,7 +669,7 @@ input[aria-invalid="true"] { border-color: #f87171; }
 
 .result-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 .result-table th,
-.result-table td { padding: 0.35rem 0.5rem; text-align: left; border-bottom: 1px solid var(--border); }
+.result-table td { padding: 0.35rem 0.5rem; text-align: center; border-bottom: 1px solid var(--border); }
 .result-table th { color: var(--muted); font-weight: 600; }
 .result-table td:not(:first-child) { font-family: var(--mono); }
 .sim-warning { margin-bottom: 0.6rem; }

@@ -11,8 +11,8 @@ load_dotenv() # Pastikan load_dotenv di sini
 db = SQLAlchemy()
 
 def create_app():
-    static_folder = 'public'
-    template_folder = os.path.join('electrolab', 'templates')
+    static_folder = os.path.join(BASE_DIR, 'public')
+    template_folder = os.path.join(BASE_DIR, 'electrolab', 'templates')
     app = Flask(__name__, static_folder=static_folder, static_url_path='', template_folder=template_folder)
 
     # Konfigurasi Database

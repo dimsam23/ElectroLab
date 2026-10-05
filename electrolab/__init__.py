@@ -39,10 +39,21 @@ def create_app():
     os.makedirs(app.instance_path, exist_ok=True)
     db.init_app(app)
 
-    # Root route to test
-    @app.route('/test-static')
-    def test_static():
-        return "Static path: " + app.static_folder
+    # Serve static files directly from /public route
+    @app.route('/css/<path:filename>')
+    def serve_css(filename):
+        from flask import send_from_directory
+        return send_from_directory(os.path.join(app.static_folder, 'css'), filename)
+    
+    @app.route('/js/<path:filename>')
+    def serve_js(filename):
+        from flask import send_from_directory
+        return send_from_directory(os.path.join(app.static_folder, 'js'), filename)
+    
+    @app.route('/images/<path:filename>')
+    def serve_images(filename):
+        from flask import send_from_directory
+        return send_from_directory(os.path.join(app.static_folder, 'images'), filename)
 
     # Daftarkan blueprint
     from .routes.api_calculators import api_calculators_bp
@@ -53,8 +64,11 @@ def create_app():
     app.register_blueprint(api_calculators_bp)
     app.register_blueprint(projects_bp)
 
-    # Buat tabel
-    with app.app_context():
-        db.create_all()
+    # Buat tabel (skip on serverless cold start if unnecessary/risky to avoid 500)
+    try:
+        with app.app_context():
+            db.create_all()
+    except Exception as e:
+        print("Warning: Could not create tables automatically:", e)
 
     return app

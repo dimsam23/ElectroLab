@@ -32,6 +32,10 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-only-change-me")
 
+    # Set a writable instance path for serverless environments (Vercel)
+    import os
+    app.instance_path = os.path.join('/tmp', 'instance')
+    os.makedirs(app.instance_path, exist_ok=True)
     db.init_app(app)
 
     # Daftarkan blueprint

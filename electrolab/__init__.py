@@ -26,6 +26,10 @@ def create_app():
     if '+pg8000' in db_url:
         db_url = db_url.replace('+pg8000', '')
 
+    # Hapus semua query params (seperti ?sslmode=...) karena bisa menyebabkan error driver
+    if '?' in db_url:
+        db_url = db_url.split('?')[0]
+
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-only-change-me")

@@ -15,23 +15,8 @@ def create_app():
     template_folder = os.path.join(BASE_DIR, 'electrolab', 'templates')
     app = Flask(__name__, static_folder=static_folder, static_url_path='/static', template_folder=template_folder)
 
-    # Konfigurasi Database
-    db_url = os.environ.get('DATABASE_URL', 'sqlite:///local.db')
-    
-    try:
-        if db_url.startswith("postgres://"):
-            db_url = db_url.replace("postgres://", "postgresql://", 1)
-        if '+pg8000' in db_url:
-            db_url = db_url.replace('+pg8000', '')
-        if '?' in db_url:
-            db_url = db_url.split('?')[0]
-        if db_url.startswith('postgresql://') and '+psycopg2' not in db_url:
-            db_url = db_url.replace('postgresql://', 'postgresql+psycopg2://', 1)
-        
-        app.config['SQLALCHEMY_DATABASE_URI'] = db_url
-    except Exception as e:
-        print(f"Database URL fallback to SQLite due to error: {e}")
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///local.db'
+    # Paksa SQLite untuk Vercel (lebih stabil di serverless)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///local.db'
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-only-change-me")
